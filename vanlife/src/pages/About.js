@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"
-import bgImg from "./images/about-hero.jpg"
+import bgImg from "../images/about-hero.jpg"
 
 export default function About() {
     return(
