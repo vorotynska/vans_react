@@ -23,8 +23,9 @@ export default function HostVans() {
             van.imageUrl
         }
         alt = {
-            `Photo of ${van.name}`
-        }
+          `Photo of ${van.name}`
+      }
+    
         /> < div className = "host-van-info" >
         <h3> {
             van.name

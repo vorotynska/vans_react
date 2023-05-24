@@ -14,7 +14,7 @@ import HostVans from './host/HostVans';
 import HostVanDetail from './host/HostVanDetail';
 import HostVanInfo from './host/HostVanInfo'
 import HostVanPricing from './host/HostVanPricing';
-import HostPhoto from './host/HostVanPricing'
+import HostVanPhoto from './host/HostVanPhoto';
 
 import "./server"
 
@@ -38,7 +38,7 @@ function App() {
                     <Route path='vans/:id' element={<HostVanDetail />} >
                       <Route index element={<HostVanInfo />} />
                       <Route path='pricing' element={<HostVanPricing />} />
-                      <Route path='photo' element={<HostPhoto />} />
+                      <Route path='photo' element={<HostVanPhoto />} />
                     </Route>
             </Route>
           </Route>
