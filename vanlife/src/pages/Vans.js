@@ -19,8 +19,13 @@ export default function Vans() {
 
   const vanElements = displayerdVans.map(van => (
     <div key={van.id} className="van-title">
-      <Link to={`/vans/${van.id}`}>
-        <img src={van.imageUrl}   alt = {`Photo of ${van.name}`} />
+      <Link 
+      to={van.id} 
+      state={{
+       search: `?${searchParams.toString()}`,
+       type: typeFilter
+       }}>
+        <img src={van.imageUrl} />
         <div className="van-info">
             <h3>{van.name}</h3>
             <p>${van.price}<span>/day</span></p>
@@ -29,36 +34,55 @@ export default function Vans() {
       </Link>
     </div>
   ))
+
+   function handleFilterChange(key, value) {
+    setSearchParams(prevParams => {
+      if (value === null) {
+        prevParams.delete(key)
+      } else {
+        prevParams.set(key, value)
+      }
+      return prevParams
+    })
+   }
+
  return (
     <div className="van-list-container">
         <h1>Explore our van options</h1>
         <div className="van-list-filter-buttons">
         <button 
-        onClick={() => setSearchParams({type: "simple"})}
-        className="van-type simple">
+        onClick={() => handleFilterChange("type", "simple")}
+        className={
+          `van-type simple ${typeFilter === "simple" ? "selected" : ""}`
+        }>
           Simple
         </button>
 
         <button 
-        onClick={() => setSearchParams({type: "luxury"})}
-        className="van-type luxury">
+        onClick={() => handleFilterChange("type", "luxury")}
+        className={
+          `van-type simple ${typeFilter === "luxury" ? "selected" : ""}`
+        }>
           Luxury
         </button>
 
         <button 
-        onClick={() => setSearchParams({type: "rugged"})}
-        className="van-type rugged">
+       onClick={() => handleFilterChange("type", "rugged")}
+       className={
+        `van-type simple ${typeFilter === "rugged" ? "selected" : ""}`
+      }>
           Rugged
         </button>
 
-        <button 
-        onClick={() => setSearchParams({})}
-        className="van-type clear-filter">
-          Clear filter
-        </button>
+       {typeFilter ? (
+         <button 
+         onClick={() => handleFilterChange("type", null)}
+          className="van-type clear-filter">
+            Clear filter
+          </button>
+       ) : null}
 
-         
-        </div>
+          </div>
       <div className="van-list">
         {vanElements}
       </div>
