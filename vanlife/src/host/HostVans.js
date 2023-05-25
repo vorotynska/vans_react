@@ -1,17 +1,25 @@
 import React from "react"
 import {
-    Link
+    Link, useLoaderData
 } from "react-router-dom"
+import { getHostVans } from "../api"
+import { requireAuth } from "../utils"
+
+export async function loader() {
+  await requireAuth()
+  return getHostVans()
+}
 
 export default function HostVans() {
-    const [vans, setVans] = React.useState([])
+   // const [vans, setVans] = React.useState([])
+   const vans = useLoaderData()
 
   
-    React.useEffect(() => {
+ /*   React.useEffect(() => {
       fetch("/api/host/vans")
           .then(res => res.json())
           .then(data => setVans(data.vans))
-  }, [])
+  }, [])  */
 
     const hostVansEls = vans.map(van => ( 
       <Link 
@@ -26,7 +34,8 @@ export default function HostVans() {
           `Photo of ${van.name}`
       }
     
-        /> < div className = "host-van-info" >
+        /> 
+        < div className = "host-van-info" >
         <h3> {
             van.name
         } </h3>
@@ -39,16 +48,11 @@ export default function HostVans() {
     return ( 
       <section>
         <h1 className = "host-vans-title" > Your listed vans </h1>
-        <div className = "host-vans-list" > {
-            vans.length > 0 ? ( 
+        <div className = "host-vans-list" >
+        
               <section> 
                 {hostVansEls} 
                 </section>
-
-            ) : ( 
-              <h2> Loading... </h2>
-            )
-        } 
         </div> 
         </section>
     )
