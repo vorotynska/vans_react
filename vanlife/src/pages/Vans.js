@@ -1,5 +1,11 @@
 import React from "react";
-import { Link, useSearchParams, useLoaderData, defer } from "react-router-dom";
+import {
+  Link,
+   useSearchParams,
+   useLoaderData,
+   defer,
+   Await
+   } from "react-router-dom";
 import { getVans } from "../api";
 
 export function loader() {
@@ -8,30 +14,25 @@ export function loader() {
 
 export default function Vans() {
   const [searchParams, setSearchParams] = useSearchParams()
-  //  const [vans, setVans] = React.useState([])
-  //  const [loading, setLoading] = React.useState(false)
-    const [error, setError] = React.useState(null)
-    const vans = useLoaderData()
+   const dataPromise = useLoaderData()
   
 
     const typeFilter = searchParams.get("type")
 
-   /* React.useEffect(() => {
-      async function loadVans() {
-        setLoading(true)
-        try {
-          const data = await getVans()
-          setVans(data)
-        } catch(err) {
-          setError(err)
-        } finally {
-          setLoading(false)
-        }
-       }
-      loadVans()
-    }, []) */
+  
+ function handleFilterChange(key, value) {
+    setSearchParams(prevParams => {
+      if (value === null) {
+        prevParams.delete(key)
+      } else {
+        prevParams.set(key, value)
+      }
+      return prevParams
+    })
+   }
 
-    const displayerdVans = typeFilter
+  function renderVanElements(vans) {
+        const displayerdVans = typeFilter
        ? vans.filter(van => van.type === typeFilter)
        : vans
 
@@ -52,26 +53,10 @@ export default function Vans() {
       </Link>
     </div>
   ))
-
-   function handleFilterChange(key, value) {
-    setSearchParams(prevParams => {
-      if (value === null) {
-        prevParams.delete(key)
-      } else {
-        prevParams.set(key, value)
-      }
-      return prevParams
-    })
-   }
-
-
-   if (error) {
-    return <h1>There was an error: {error.message}</h1>
-   }
+         
 
  return (
-    <div className="van-list-container">
-        <h1>Explore our van options</h1>
+   <>
         <div className="van-list-filter-buttons">
         <button 
         onClick={() => handleFilterChange("type", "simple")}
@@ -109,6 +94,20 @@ export default function Vans() {
       <div className="van-list">
         {vanElements}
       </div>
+      </>
+     )
+   
+   }
+
+   return (
+        <div className="van-list-container">
+        <h1>Explore our van options</h1>
+        <React.Suspense fallback={<h2>Loading vans...</h2>}>
+              <Await resolve={dataPromise.vans}>
+                 {renderVanElements}
+              </Await>
+        </React.Suspense>
+       
     </div>
  )   
 }

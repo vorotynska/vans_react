@@ -9,18 +9,24 @@ import {
 import { loginUser } from "../api";
 
 
-export function loader({ request }) {
+export function loader({request}) {
     return new URL(request.url).searchParams.get("message")
 }
 
-export async function action({ request }) {
+export async function action({
+    request
+}) {
     const formData = await request.formData()
     const email = formData.get("email")
     const password = formData.get("password")
-    const pathname =  new URL(request.url)
+    const pathname = new URL(request.url)
         .searchParams.get("redirectTo") || "/host"
+
     try {
-        const data = await loginUser({ email, password })
+        const data = await loginUser({
+            email,
+            password
+        })
         localStorage.setItem("loggedin", true)
         return redirect(pathname)
     } catch (err) {
@@ -32,6 +38,7 @@ export default function Login() {
     const errorMessage = useActionData()
     const message = useLoaderData()
     const navigation = useNavigation()
+
    
     
    

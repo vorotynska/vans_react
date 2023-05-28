@@ -9,9 +9,7 @@ export default function Header() {
     color: "#161616"
    }
 
-  function fakeLogOut() {
-
-  }
+  
 
     return (
         <header>
@@ -35,7 +33,7 @@ export default function Header() {
                    >
                      Vans
                     </NavLink>
-                    <Link to="login" className="login-link">
+                    <Link to="/login" className="login-link">
                       <img 
                           src={imageUrl}
                           className="login-icon"

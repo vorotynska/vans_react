@@ -1,6 +1,4 @@
-import {
-    redirect
-} from "react-router-dom"
+import { redirect } from "react-router-dom"
 
 export async function requireAuth(request) {
     const pathname = new URL(request.url).pathname
