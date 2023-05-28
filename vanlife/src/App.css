@@ -56,6 +56,10 @@ header a:hover {
   text-decoration: underline;
 }
 
+header button {
+  cursor: pointer;
+}
+
 header .login-icon {
   height: 18px;
   width: 18px;
@@ -529,6 +533,11 @@ text-decoration: underline;
   margin-top: 22px;
   color: white;
   font-family: sans-serif;
+}
+
+.login-form > button {
+  background-color: #aaaaaa;
+  cursor: not-allowed;
 }
 
 .red {

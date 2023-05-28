@@ -7,10 +7,12 @@ export function loader({params}) {
 }
 
 export default function VanDetail() {
-    const params = useParams()
+//const params = useParams()
     const location = useLocation()
+    const van = useLoaderData()
+
+    
   //  const [van, setVan] = React.useState(null)
-  const van = useLoaderData()
 
  /* React.useEffect(() => {
   fetch(`/api/vans/${params.id}`)
@@ -18,13 +20,13 @@ export default function VanDetail() {
   .then(data => setVan(data.vans))
   }, [params.id])  */
 
-  const search = location.state?.search || ""
-  const type = location.state?.type || "all"
+  const search = location.state?.search || "";
+  const type = location.state?.type || "all";
 
     return (
         <div className="van-detail-container">
             <Link
-            to={`..${location.state.search}`}
+            to={`..${search}`}
             relative="path"
             className="back-button"
             >&larr; <span>Back to {type} vans</span></Link>

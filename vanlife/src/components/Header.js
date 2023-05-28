@@ -1,27 +1,37 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import imageUrl from "../images/avatar-login.png"
+import  imageUrl from "../images/icon-log.png"
 
 export default function Header() {
+   const activeStyles = {
+    fontWeight: "bold",
+    textDecoration: "underline",
+    color: "#161616"
+   }
+
+  function fakeLogOut() {
+
+  }
+
     return (
         <header>
             <Link className='site-logo' to="/">#VANLIFE</Link>
               <nav>
                  <NavLink
                   to="/host"
-                  className={({isActive}) => isActive ? "active-link" : null}
+                  style={({isActive}) => isActive ? activeStyles : null}
                   >
                     Host
                  </NavLink>
                   <NavLink 
-                  to="/about"
-                  className={({isActive}) => isActive ? "active-link" : null}
+                  to="about"
+                  style={({isActive}) => isActive ? activeStyles : null}
                    >
                      About
                     </NavLink>
                   <NavLink
                    to="vans"
-                      className={({isActive}) => isActive ? "active-link" : null}
+                      style={({isActive}) => isActive ? activeStyles : null}
                    >
                      Vans
                     </NavLink>
@@ -31,6 +41,7 @@ export default function Header() {
                           className="login-icon"
                           />
                     </Link>
+                    <button>X</button>
               </nav>
         </header>
     )
