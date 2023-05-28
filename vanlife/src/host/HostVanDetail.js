@@ -9,9 +9,7 @@ export async function loader({params, request}) {
 }
 
 export default function HostVanDetail() {
-  // const { id } = useParams()
-  //  const [currentVan, setCurrentVan] = React.useState(null)
-   const  currentVan = useLoaderData()
+     const  currentVan = useLoaderData()
 
     const activeStyles = {
       fontWeight: "bold",
