@@ -41,10 +41,7 @@ export default function Login() {
 
    
     
-   
-
-
-return (
+   return (
     <div className="login-container">
       
         <h1>Sing in to your account</h1>
@@ -66,7 +63,7 @@ return (
             placeholder="Password"
             />
             <button 
-                 disabled ={navigation.state === "submitting"}
+                 disabled={navigation.state === "submitting"}
             >
                 {navigation.state === "submitting"
                 ? "Logging in..."
