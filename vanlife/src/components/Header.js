@@ -10,7 +10,7 @@ export default function Header() {
    }
 
   function fakeLogOut() {
-    localStorage.remove('loggedin')
+    localStorage.removeItem('loggedin')
   }
 
     return (
